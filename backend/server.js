@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const db = require('./models');
 const handle = require('./handlers');
 
 const app = express();
@@ -42,3 +43,6 @@ app.use(handle.errors);
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
+
+// With no npm script in package.json - nodemon
+// with "start": "nodemon" - npm run start
