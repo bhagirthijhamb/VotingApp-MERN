@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors'); 
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy; 
+const keys = require('./config/keys');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -12,6 +15,23 @@ const PORT = process.env.PORT || 5000;
 // cors and body-parser are just express middlewares, so when we use them, we initialiase them
 app.use(cors());
 app.use(bodyParser.json()); // we need to parse just the json data.
+
+passport.use(
+  new GoogleStrategy({
+    clientID: keys.googleClientID,
+    clientSecret: keys.googleClientSecret,
+    callbackURL: '/auth/google/callback' 
+  }, (accessToken, refreshToken, profile, done) => {
+    console.log('accessToken' ,accessToken);
+    console.log('profile', profile);
+  })
+);
+
+app.get('/auth/google', passport.authenticate('google', {
+  scope: [ 'profile', 'email' ]
+}))
+
+app.get('/auth/google/callback', passport.authenticate('google'))
 
 // app object represents the underlying running express server
 // the express sserver has some route handlers associated with it
@@ -49,5 +69,4 @@ app.listen(PORT, console.log(`Server started on port ${PORT}`))
 // With no npm script in package.json - nodemon
 // with "start": "nodemon" - npm run start
 
-
-// extra comment
+// https://accounts.google.com/signin/oauth/error?authError=ChVyZWRpcmVjdF91cmlfbWlzbWF0Y2gS1QJUaGUgcmVkaXJlY3QgVVJJIGluIHRoZSByZXF1ZXN0LCBodHRwOi8vbG9jYWxob3N0OjUwMDAvYXV0aC9nb29nbGUvY2FsbGJhY2ssIGRvZXMgbm90IG1hdGNoIHRoZSBvbmVzIGF1dGhvcml6ZWQgZm9yIHRoZSBPQXV0aCBjbGllbnQuIFRvIHVwZGF0ZSB0aGUgYXV0aG9yaXplZCByZWRpcmVjdCBVUklzLCB2aXNpdDogaHR0cHM6Ly9jb25zb2xlLmRldmVsb3BlcnMuZ29vZ2xlLmNvbS9hcGlzL2NyZWRlbnRpYWxzL29hdXRoY2xpZW50LzI4MTc2NDYzMTM1MC00ZmpkNjJoMDVvdTFnZ2FsMTRjOXBxczlnOW10OTAxbC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbT9wcm9qZWN0PTI4MTc2NDYzMTM1MBpFaHR0cDovL2RldmVsb3BlcnMuZ29vZ2xlLmNvbS9hY2NvdW50cy9kb2NzL09BdXRoMkxvZ2luI3NldHJlZGlyZWN0dXJpIJAD&client_id=281764631350-4fjd62h05ou1ggal14c9pqs9g9mt901l.apps.googleusercontent.com
