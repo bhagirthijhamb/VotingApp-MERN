@@ -19,7 +19,7 @@ app.use(bodyParser.json()); // we need to parse just the json data.
 app.get('/', (req, res, next) => {
   // res.send('hello world');
   // frontend would expect certai type of data - json objects
-  res.send({ hello: 'world' });
+  res.send({ Hare : 'Krishna' });
 })
 
 // Almost all the express methods like get, use expect an middleware function (the second argument to app.get() below);
