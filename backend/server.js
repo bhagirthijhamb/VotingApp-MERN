@@ -7,7 +7,7 @@ const db = require('./models');
 const handle = require('./handlers');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 // cors and body-parser are just express middlewares, so when we use them, we initialiase them
 app.use(cors());
