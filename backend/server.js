@@ -13,7 +13,9 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json()); // we need to parse just the json data.
 
-
+// app object represents the underlying running express server
+// the express sserver has some route handlers associated with it
+// app.get() creates a brand new route handler
 app.get('/', (req, res, next) => {
   // res.send('hello world');
   // frontend would expect certai type of data - json objects
