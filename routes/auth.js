@@ -1,5 +1,9 @@
-const passport = require('passport');
 const router = require('express').Router();
+const handle = require('./../handlers');
+const passport = require('passport');
+
+router.post('/register');
+router.post('/login');
 
 router.get('/google', passport.authenticate('google', {
     scope: [ 'profile', 'email' ]
