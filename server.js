@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors'); 
 require('./services/passport');
-// const authRoutes = require('./routes/authRoutes');
+const routes = require('./routes');
 
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -28,6 +28,7 @@ app.get('/', (req, res, next) => {
   // frontend would expect certai type of data - json objects
   res.send({ Hare : 'Krishna' });
 })
+app.use('/api/auth', routes.auth);
 
 // Almost all the express methods like get, use expect an middleware function (the second argument to app.get() below);
 // app.use((req, res, next) => {
@@ -50,7 +51,7 @@ app.use(handle.notFound);
 app.use(handle.errors);
 
 // authRoutes(app);
-require('./routes/authRoutes')(app);
+// require('./routes/auth')(app);
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
