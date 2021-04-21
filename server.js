@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors'); 
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy; 
-const keys = require('./config/keys');
+require('./services/passport');
+// const authRoutes = require('./routes/authRoutes');
+
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -16,22 +16,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json()); // we need to parse just the json data.
 
-passport.use(
-  new GoogleStrategy({
-    clientID: keys.googleClientID,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback' 
-  }, (accessToken, refreshToken, profile, done) => {
-    console.log('accessToken' ,accessToken);
-    console.log('profile', profile);
-  })
-);
 
-app.get('/auth/google', passport.authenticate('google', {
-  scope: [ 'profile', 'email' ]
-}))
 
-app.get('/auth/google/callback', passport.authenticate('google'))
+
 
 // app object represents the underlying running express server
 // the express sserver has some route handlers associated with it
@@ -62,7 +49,8 @@ app.use(handle.notFound);
 // })
 app.use(handle.errors);
 
-
+// authRoutes(app);
+require('./routes/authRoutes')(app);
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
 
