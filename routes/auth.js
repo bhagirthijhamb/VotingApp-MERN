@@ -3,7 +3,7 @@ const handle = require('./../handlers');
 const passport = require('passport');
 
 router.post('/register', handle.register);
-router.post('/login');
+router.post('/login', handle.login);
 
 router.get('/google', passport.authenticate('google', {
     scope: [ 'profile', 'email' ]
