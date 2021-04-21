@@ -2,7 +2,7 @@ const router = require('express').Router();
 const handle = require('./../handlers');
 const passport = require('passport');
 
-router.post('/register');
+router.post('/register', handle.register);
 router.post('/login');
 
 router.get('/google', passport.authenticate('google', {
