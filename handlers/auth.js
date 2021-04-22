@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
     // send status with each response
     res.status(201).json({ id, username, token })
   } catch(err){
-    if(err.code === 110000) {
+    if(err.code === 11000) {
       err.message = 'Sorry, that username is already taken';
     }
     next(err)
