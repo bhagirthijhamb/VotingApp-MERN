@@ -9,7 +9,7 @@ module.exports.notFound = (req, res, next) => {
 }
 
 module.exports.errors = (err, req, res, next) => {
-  res.status(err.status || 500).json({
+  res.status(err.status || 400).json({ // 500 means our server is broken
     err: err.message || "Something went wrong"
   })
 }

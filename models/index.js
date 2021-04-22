@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/votingApp');
+// mongoose.connect(`${process.env.DATABASE}`);
 
 // This allows us to use the db variable inside our application
 // as db.User and  as db.Poll
