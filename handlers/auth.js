@@ -44,3 +44,12 @@ exports.login = async (req, res, next) => {
     next(err)
   }
 }
+
+exports.getCurrentUser = async (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch(err){
+    console.log(err);
+    next(err);
+  }
+}

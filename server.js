@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors'); 
 const passport = require('passport');
+const cookieSession = require('cookie-session');
 // require('./models/User')
 require('./services/passport');
+const keys = require('./config/keys');
 
 const routes = require('./routes');
 
@@ -19,7 +21,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json()); // we need to parse just the json data.
 
-
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 *1000,
+    keys: [keys.cookieKey]
+  })
+)
 
 // tell passport that it makes use of cookies to handle authentication
 app.use(passport.initialize());
