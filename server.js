@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors'); 
+const passport = require('passport');
 // require('./models/User')
 require('./services/passport');
 
@@ -20,7 +21,9 @@ app.use(bodyParser.json()); // we need to parse just the json data.
 
 
 
-
+// tell passport that it makes use of cookies to handle authentication
+app.use(passport.initialize());
+app.use(passport.session())
 
 // app object represents the underlying running express server
 // the express sserver has some route handlers associated with it
