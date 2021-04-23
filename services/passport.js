@@ -1,5 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy; 
-const db = require('./../models');
+// const db = require('./../models');
+const User = require('./../models/User');
 const passport = require('passport');
 const keys = require('./../config/keys');
 // const mongoose = require('mongoose');
@@ -12,7 +13,8 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-  db.User.findById(id).then(user => {
+  // db.User.findById(id).then(user => {
+  User.findById(id).then(user => {
     done(null, user)
   })
 })
@@ -26,14 +28,16 @@ passport.use(
     console.log('accessToken' ,accessToken);
     console.log('profile', profile);
     // with Promises
-    db.User.findOne({ googleId: profile.id })
+    // db.User.findOne({ googleId: profile.id })
+    User.findOne({ googleId: profile.id })
       .then(existingUser => {
         if(existingUser){
           // we already have a user
           done(null, existingUser)
         } else {
           // we do not have user, so create one
-          new db.User({ googleId: profile.id, username: profile.displayName })
+          // new db.User({ googleId: profile.id, username: profile.displayName })
+          new User({ googleId: profile.id, username: profile.displayName })
             .save()
             .then(user => done(null, user))
         }
