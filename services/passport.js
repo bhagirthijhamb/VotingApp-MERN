@@ -7,6 +7,16 @@ const keys = require('./../config/keys');
 
 const db = require('./../models');
 
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+  db.User.findById(id).then(user => {
+    done(null, user)
+  })
+})
+
 passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientID,
@@ -23,7 +33,8 @@ passport.use(
           done(null, existingUser)
         } else {
           // we do not have user, so create one
-          new db.User({ googleId: profile.id, username: profile.displayName }).save()
+          new db.User({ googleId: profile.id, username: profile.displayName })
+            .save()
             .then(user => done(null, user))
         }
       })
