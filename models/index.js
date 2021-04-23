@@ -10,5 +10,5 @@ mongoose.connect(keys.mongoURI);
 
 // This allows us to use the db variable inside our application
 // as db.User and  as db.Poll //
-module.exports.User = require('./User');
-module.exports.Poll = require('./Poll');
+// module.exports.User = require('./User');
+// module.exports.Poll = require('./Poll');
