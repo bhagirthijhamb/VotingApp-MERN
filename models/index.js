@@ -9,6 +9,6 @@ mongoose.connect(keys.mongoURI);
 // mongoose.connect(`${process.env.DATABASE}`);
 
 // This allows us to use the db variable inside our application
-// as db.User and  as db.Poll
+// as db.User and  as db.Poll //
 module.exports.User = require('./User');
 module.exports.Poll = require('./Poll');
