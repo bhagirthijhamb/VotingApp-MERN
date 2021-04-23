@@ -53,3 +53,8 @@ exports.getCurrentUser = async (req, res, next) => {
     next(err);
   }
 }
+
+exports.logoutUser = (req, res, next) => {
+  req.logout();
+  res.send(req.user);
+}

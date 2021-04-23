@@ -11,7 +11,8 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/callback', passport.authenticate('google'))
 
-router.get('/currentUser', handle.getCurrentUser)
+router.get('/currentUser', handle.getCurrentUser);
+router.get('/logout', handle.logoutUser);
 
 
 // module.exports = (app) => {
