@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const keys = require('./../config/keys');
 const db = require('./../models');
 
 exports.register = async (req, res, next) => {
@@ -7,7 +7,7 @@ exports.register = async (req, res, next) => {
     const user = await db.User.create(req.body);
     const { id, username } = user;
 
-    const token = jwt.sign({ id, username }, process.env.SECRET)
+    const token = jwt.sign({ id, username }, keys.tokenSecret)
     // res.json(user);
     // send status with each response
     res.status(201).json({ id, username, token })
@@ -26,7 +26,7 @@ exports.login = async (req, res, next) => {
     const valid = await user.comparePassword(req.body.password);
 
     if(valid){
-      const token = jwt.sign({ id, username }, process.env.SECRET)
+      const token = jwt.sign({ id, username }, keys.tokenSecret)
 
       res.json({ id, username, token });
     } else {

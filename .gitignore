@@ -168,6 +168,6 @@ temp/
 .history
 .ionide
 
-keys.js
+dev.js
 
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,visualstudiocode
