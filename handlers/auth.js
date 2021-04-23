@@ -47,6 +47,7 @@ exports.login = async (req, res, next) => {
 
 exports.getCurrentUser = async (req, res, next) => {
   try {
+    // res.send(req.session)
     res.send(req.user);
   } catch(err){
     console.log(err);
