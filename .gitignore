@@ -167,7 +167,6 @@ temp/
 # Ignore all local history of files
 .history
 .ionide
-
-dev.js
+config/dev.js
 
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,visualstudiocode
