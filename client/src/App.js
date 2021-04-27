@@ -17,7 +17,7 @@ function App() {
         >
           Hare Krishna
         </a>
-          <a href="/api/auth/google">Sign in with Google</a>
+          <a href="/api/auth/google" className="googleLink">Sign in with Google</a>
       </header>
     </div>
   );
