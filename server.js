@@ -41,6 +41,7 @@ app.get('/', (req, res, next) => {
   res.send({ Hare : 'Krishna' });
 })
 app.use('/api/auth', routes.auth);
+app.use('/api/polls', routes.poll);
 
 // Almost all the express methods like get, use expect an middleware function (the second argument to app.get() below);
 // app.use((req, res, next) => {
